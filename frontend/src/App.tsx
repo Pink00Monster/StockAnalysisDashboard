@@ -25,11 +25,16 @@ function App() {
     console.log(searchResult);
   }
 
+  const onPortfolioCreate = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    console.log(e);
+  }
+
   return (
     <div className="App">
       <Search onClick={onClick} search={searchTerm} handleChange={handleChange}/>
+      <CardList searchResults={searchResult} onPortfolioCreate={onPortfolioCreate} />
       {serverError && <p style={{ color: 'red' }}>{serverError}</p>}
-      <CardList searchResults={searchResult} />
     </div>
   )
 }
