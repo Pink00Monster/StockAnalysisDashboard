@@ -2,7 +2,7 @@ import React, { useState, type JSX } from 'react'
 
 type Props = {}
 
-const Search : React.FC<Props> = (props: Props) :JSX.Element => {
+const Search = (props: Props) => {
     const[searchTerm, setSearchTerm] = useState<string>("");
     return (
     <div>
@@ -12,9 +12,9 @@ const Search : React.FC<Props> = (props: Props) :JSX.Element => {
             value={searchTerm}
             onChange={(e) => {setSearchTerm(e.target.value);
                 console.log(e);
-            }}
-            
+            }}     
         />
+        <button onClick={() => console.log("Search for:", searchTerm)}>Search</button>
     </div>
   )
 }
