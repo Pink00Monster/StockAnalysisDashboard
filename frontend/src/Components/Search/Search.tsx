@@ -2,17 +2,18 @@ import type { SyntheticEvent } from 'react';
 import { searchCompanies } from '../../api';
 
 type Props = {
-    onClick: (e:SyntheticEvent) => void;
+    onSearchSubmit: (e: SyntheticEvent) => void;
     search: string | undefined;
-    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Search = (props: Props) => {
+const Search = ({ onSearchSubmit, search, handleSearchChange }: Props) => {
     return (
-    <div>
-        <input value={props.search} onChange={props.handleChange} />
-        <button onClick={props.onClick}>Search</button>
-    </div>
+    <>
+        <form onSubmit={onSearchSubmit}>
+            <input value={search} onChange={handleSearchChange} />
+        </form>
+    </>
   )
 }
 
