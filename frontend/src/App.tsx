@@ -9,7 +9,7 @@ import type { CompanySearch } from './company'
 function App() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
-  const [serverError, setServerError] = useState<string>("");
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -29,7 +29,7 @@ function App() {
     <div className="App">
       <Search onClick={onClick} search={searchTerm} handleChange={handleChange}/>
       {serverError && <p style={{ color: 'red' }}>{serverError}</p>}
-      <CardList />
+      <CardList searchResults={searchResult} />
     </div>
   )
 }

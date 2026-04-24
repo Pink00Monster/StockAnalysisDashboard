@@ -1,22 +1,21 @@
-import React, { type JSX } from 'react'
 import "./Card.css"
+import type { CompanySearch } from '../../company';
 
 interface Props {
-    companyName: string;
-    ticker: string;
-    price: number;
+  id: string;
+  searchResult: CompanySearch;
 }
 
-const Card = (props: Props) => {
+const Card = ({searchResult }: Props) => {
   return (
     <div className='card'>
-        <img src="https://www.visitfyn.com/files/visitfyn.com/styles/sixteen_nine_2xl_webp/public/2020-02/Dyreborg%20Skov_Daniel%20Villadsen.jpg.webp?h=-iJOEkU_&v=450x371" alt="Image" />
+        <img alt="company logo" />
     
         <div className="details">
-            <h2>{props.companyName} ({props.ticker})</h2>
-            <p>${props.price.toFixed(2)}</p>
+            <h2>{searchResult.name} ({searchResult.symbol})</h2>
+            <p>${searchResult.currency}</p>
         </div>
-        <p className='info'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
+        <p className='info'> {searchResult.exchangeFullName} - {searchResult.exchange} </p>
     </div>
 
   )
