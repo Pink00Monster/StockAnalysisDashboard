@@ -12,7 +12,11 @@ export const searchCompanies = async (query: string) => {
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error("Axios error:", error.message);
+            return error.message;
+        }
+        else {
+            console.error("Unexpected error:", error);
+            return "An unexpected error occurred.";
         } 
-        else console.error("Unexpected error:", error);
     }
 }

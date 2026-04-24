@@ -1,20 +1,17 @@
-import React, { useState, type JSX } from 'react'
+import type { SyntheticEvent } from 'react';
+import { searchCompanies } from '../../api';
 
-type Props = {}
+type Props = {
+    onClick: (e:SyntheticEvent) => void;
+    search: string | undefined;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 const Search = (props: Props) => {
-    const[searchTerm, setSearchTerm] = useState<string>("");
     return (
     <div>
-        <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => {setSearchTerm(e.target.value);
-                console.log(e);
-            }}     
-        />
-        <button onClick={() => console.log("Search for:", searchTerm)}>Search</button>
+        <input value={props.search} onChange={props.handleChange} />
+        <button onClick={props.onClick}>Search</button>
     </div>
   )
 }
