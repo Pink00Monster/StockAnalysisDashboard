@@ -48,3 +48,12 @@ export const getIncomeStatement = async (symbol: string) => {
         console.log("Axios error:", error.message);
     }
 }
+
+export const getBalanceSheet = async (symbol: string) => {
+    try {
+        const response = await axios.get<CompanyIncomeStatement[]>(`https://financialmodelingprep.com/stable/balance-sheet?symbol=${symbol}&apikey=${import.meta.env.VITE_API_KEY}`);
+        return response;
+    } catch (error:any) {
+        console.log("Axios error:", error.message);
+    }
+}

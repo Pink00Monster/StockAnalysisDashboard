@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Table from '../../Components/Table/Table'
 import RatioList from '../../Components/RatioList/RatioList'
 import { testIncomeStatementData } from '../../Components/Table/testData'
@@ -17,7 +17,7 @@ const DesignPage = (props: Props) => {
     <>
         <h1>Design Page</h1>
         <RatioList data={testIncomeStatementData} config={tableConfig} />
-        <Table/>
+        <Table data={testIncomeStatementData} config={tableConfig}/>
     </>
   )
 }

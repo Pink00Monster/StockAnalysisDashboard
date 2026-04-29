@@ -72,11 +72,11 @@ const CompanyProfile = (props: Props) => {
   const symbol = useOutletContext<string>();
   const [companKeyMetrics, setcompanyKeyMetrics] = useState<CompanyKeyMetrics>();
   useEffect(() => {
-    const getCompanyKeyMetrics = async () => {
+    const CompanyKeyMetricsData = async () => {
       const value = await getKeyMetrics(symbol);
       setcompanyKeyMetrics(value?.data[0]);
     }
-    getCompanyKeyMetrics();
+    CompanyKeyMetricsData();
   },[])
   return (
     <>
