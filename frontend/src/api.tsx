@@ -1,13 +1,13 @@
 import axios from "axios";
-import type { CompanyProfile, CompanySearch } from "./company";
+import type { CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile, CompanySearch } from "./company";
 
 interface SearchResponse {
     data: CompanySearch[];
 }
 
-export const searchCompanies = async (query: string) => {
+export const searchCompanies = async (symbol: string) => {
     try {
-        const response = await axios.get<SearchResponse>(`https://financialmodelingprep.com/stable/search-symbol?query=${query}&apikey=${import.meta.env.VITE_API_KEY}`);
+        const response = await axios.get<SearchResponse>(`https://financialmodelingprep.com/stable/search-symbol?query=${symbol}&apikey=${import.meta.env.VITE_API_KEY}`);
         return response;
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -21,9 +21,9 @@ export const searchCompanies = async (query: string) => {
     }
 }
 
-export const getCompanyProfile = async (query: string) => {
+export const getCompanyProfile = async (symbol: string) => {
     try {
-        const response = await axios.get<CompanyProfile[]>(`https://financialmodelingprep.com/stable/profile?symbol=${query}&apikey=${import.meta.env.VITE_API_KEY}`);
+        const response = await axios.get<CompanyProfile[]>(`https://financialmodelingprep.com/stable/profile?symbol=${symbol}&apikey=${import.meta.env.VITE_API_KEY}`);
         return response;
     } catch (error:any) {
         console.log("Axios error:", error.message);      
@@ -31,3 +31,20 @@ export const getCompanyProfile = async (query: string) => {
 
 }
 
+export const getKeyMetrics = async (symbol: string) => {
+    try {
+        const response = await axios.get<CompanyKeyMetrics[]>(`https://financialmodelingprep.com/stable/key-metrics-ttm?symbol=${symbol}&apikey=${import.meta.env.VITE_API_KEY}`);
+        return response;
+    } catch (error:any) {
+        console.log("Axios error:", error.message);
+    }
+}
+
+export const getIncomeStatement = async (symbol: string) => {
+    try {
+        const response = await axios.get<CompanyIncomeStatement[]>(`https://financialmodelingprep.com/stable/income-statement?symbol=${symbol}&apikey=${import.meta.env.VITE_API_KEY}`);
+        return response;
+    } catch (error:any) {
+        console.log("Axios error:", error.message);
+    }
+}

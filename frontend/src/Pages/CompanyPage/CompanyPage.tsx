@@ -24,7 +24,9 @@ const CompanyPage = (props: Props) => {
     {companyProfile ? (
       <div className="w-full relative flex ct-docs-disable-sidebar-content overflow-x-hidden">
           <Sidebar />
-          <CompanyDashboard><Tile title="Company Name" subTitle={companyProfile?.companyName} /></CompanyDashboard>
+          <CompanyDashboard symbol={symbol!}>
+            <Tile title="Company Name" subTitle={companyProfile?.companyName} />
+          </CompanyDashboard>
       </div>
     ) : (
       <div className="flex items-center justify-center w-full h-screen">  Company not found. </div>
