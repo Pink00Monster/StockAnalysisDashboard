@@ -53,12 +53,12 @@ const configs = [
     render: (company: CompanyIncomeStatement) => company.grossProfit,
   },
   {
-    label: "Operating Income",
-    render: (company: CompanyIncomeStatement) => company.operatingIncome,
+    label: "Weighted Average Shares Outstanding",
+    render: (company: CompanyIncomeStatement) => company.weightedAverageShsOut,
   },
   {
-    label: "Income Before Taxes",
-    render: (company: CompanyIncomeStatement) => company.incomeBeforeTax,
+    label: "Weighted Average Shares Outstanding - Diluted",
+    render: (company: CompanyIncomeStatement) => company.weightedAverageShsOutDil,
   },
 ];
 

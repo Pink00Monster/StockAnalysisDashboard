@@ -7,10 +7,10 @@ type Props = {
 const Table = ({ config, data }: Props) => {
     const renderedRows = data.map((company: any) => {
   return (
-    <tr key={company.cik}>
+    <tr key={company.cik + company.date}>
       {config.map((val: any) => {
         return (
-          <td className="p-3"> 
+          <td className="p-3" key={val.label}> 
             {val.render(company)}
           </td>
         );
@@ -30,7 +30,9 @@ const Table = ({ config, data }: Props) => {
   return (
     <div className="bg-white shadow rounded-lg p-4 sm:6-6 xl:p-8">
         <table>
-            <thead className="min-w-full divide=grey-200 m-5">{renderedHeaders}</thead>
+            <thead className="min-w-full divide=grey-200 m-5">
+              <tr>{renderedHeaders}</tr>  
+            </thead>
             <tbody className="bg-white divide-y divide-gray-200">{renderedRows}</tbody>
         </table>
 

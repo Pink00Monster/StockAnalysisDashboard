@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile, CompanySearch } from "./company";
+import type { CompanyBalanceSheet, CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile, CompanySearch } from "./company";
 
 interface SearchResponse {
     data: CompanySearch[];
@@ -51,7 +51,7 @@ export const getIncomeStatement = async (symbol: string) => {
 
 export const getBalanceSheet = async (symbol: string) => {
     try {
-        const response = await axios.get<CompanyIncomeStatement[]>(`https://financialmodelingprep.com/stable/balance-sheet?symbol=${symbol}&apikey=${import.meta.env.VITE_API_KEY}`);
+        const response = await axios.get<CompanyBalanceSheet[]>(`https://financialmodelingprep.com/stable/balance-sheet-statement?symbol=${symbol}&apikey=${import.meta.env.VITE_API_KEY}`);
         return response;
     } catch (error:any) {
         console.log("Axios error:", error.message);
