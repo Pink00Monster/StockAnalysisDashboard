@@ -26,6 +26,12 @@ const CompanyPage = (props: Props) => {
           <Sidebar />
           <CompanyDashboard symbol={symbol!}>
             <Tile title="Company Name" subTitle={companyProfile?.companyName} />
+            <Tile title="Price" subTitle={companyProfile?.price.toString()} />
+            <Tile title="Sector" subTitle={companyProfile?.sector} />
+            <Tile title="Market Cap" subTitle={companyProfile?.marketCap.toString()} />
+            <p className="bg-white shadow rounded text-medium text-gray-900 p-3 mt-1 m-4">
+              {companyProfile?.description}
+            </p>
           </CompanyDashboard>
       </div>
     ) : (
