@@ -3,8 +3,7 @@ import type { CompanyBalanceSheet } from "../../company";
 import { useEffect, useState } from "react";
 import { getBalanceSheet } from "../../api";
 import RatioList from "../RatioList/RatioList";
-
-type Props = {}
+import Spinner from "../Spinner/Spinner";
 
 const config = [
   {
@@ -62,7 +61,7 @@ const config = [
 ];
 
 
-const BalanceSheet = (props: Props) => {
+const BalanceSheet = () => {
   const symbol = useOutletContext<string>();
   const [balanceSheet, setBalanceSheet] = useState<CompanyBalanceSheet>();
 
@@ -79,7 +78,7 @@ const BalanceSheet = (props: Props) => {
       {balanceSheet ? (
         <RatioList config={config} data={balanceSheet} />
       ) : (
-        <h1>Company not found</h1>
+        <Spinner />
       )}
     </>
   )}

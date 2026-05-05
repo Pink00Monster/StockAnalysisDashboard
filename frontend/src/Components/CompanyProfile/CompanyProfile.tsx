@@ -3,8 +3,8 @@ import type { CompanyKeyMetrics } from '../../company';
 import { useOutletContext } from 'react-router';
 import { getKeyMetrics } from '../../api';
 import RatioList from '../RatioList/RatioList';
+import Spinner from '../Spinner/Spinner';
 
-type Props = {}
 
 const tableConfig = [
   {
@@ -68,7 +68,7 @@ const tableConfig = [
   },
 ];
 
-const CompanyProfile = (props: Props) => {
+const CompanyProfile = () => {
   const symbol = useOutletContext<string>();
   const [companKeyMetrics, setcompanyKeyMetrics] = useState<CompanyKeyMetrics>();
   useEffect(() => {
@@ -85,7 +85,7 @@ const CompanyProfile = (props: Props) => {
           <RatioList data={companKeyMetrics} config={tableConfig} />
         </>
       ) : (
-        <>Loading...</>
+        <Spinner />
       )}
     </>
   )

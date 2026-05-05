@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { CompanyCashFlow } from '../../company';
-import { useOutlet, useOutletContext } from 'react-router';
+import { useOutletContext } from 'react-router';
 import { getCashflowStatement } from '../../api';
 import Table from '../Table/Table';
+import Spinner from '../Spinner/Spinner';
 
-type Props = {}
 
 const config = [
   {
@@ -43,7 +43,7 @@ const config = [
   },
 ];
 
-const CashflowStatement = (props: Props) => {
+const CashflowStatement = () => {
     const symbol = useOutletContext<string>();
     const [cashflowStatement, setCashflowStatement] = useState<CompanyCashFlow[]>();
     useEffect(() => {
@@ -58,7 +58,7 @@ const CashflowStatement = (props: Props) => {
         {cashflowStatement ? (
             <Table config={config} data={cashflowStatement} />
         ) : (
-            <p>No data</p>
+            <Spinner />
         )}
     </>
   )

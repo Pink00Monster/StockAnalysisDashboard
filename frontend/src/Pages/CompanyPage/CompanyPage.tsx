@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import type { CompanyProfile } from '../../company';
 import { getCompanyProfile } from '../../api';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import CompanyDashboard from '../../Components/CompanyDashboard/CompanyDashboard';
 import Tile from '../../Components/Tile/Tile';
+import Spinner from '../../Components/Spinner/Spinner';
 
-type Props = {}
 
-const CompanyPage = (props: Props) => {
+const CompanyPage = () => {
   let {symbol} = useParams(); 
   const [companyProfile, setCompanyProfile] = useState<CompanyProfile>();
   
@@ -35,7 +35,7 @@ const CompanyPage = (props: Props) => {
           </CompanyDashboard>
       </div>
     ) : (
-      <div className="flex items-center justify-center w-full h-screen">  Company not found. </div>
+      <Spinner />
     )}
     </>
   )

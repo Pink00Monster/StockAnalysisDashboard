@@ -3,8 +3,8 @@ import type { CompanyIncomeStatement } from '../../company';
 import { useOutletContext } from 'react-router';
 import { getIncomeStatement } from '../../api';
 import Table from '../Table/Table';
+import Spinner from '../Spinner/Spinner';
 
-type Props = {}
 
 const configs = [
   {
@@ -62,7 +62,7 @@ const configs = [
   },
 ];
 
-const IncomeStatement = (props: Props) => {
+const IncomeStatement = () => {
   const symbol = useOutletContext<string>();
   const [incomeStatement, setIncomeStatement] = useState<CompanyIncomeStatement[]>([]);
   useEffect(() => {
@@ -74,7 +74,7 @@ const IncomeStatement = (props: Props) => {
   }, [])
   return (
     <>
-      {incomeStatement ? <><Table config={configs} data={incomeStatement} /></> : <p>Loading...</p>}
+      {incomeStatement ? <><Table config={configs} data={incomeStatement} /></> : <Spinner /> }
     </>
   )
 }
