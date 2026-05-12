@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "RhfQVdrBZFM=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\STINKY\\Documents\\Github Local\\StockAnalysisDashboard\\backend\\backend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\STINKY\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.2\\microsoft.aspnetcore.openapi.10.0.2.nupkg.sha512",
+    "C:\\Users\\STINKY\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

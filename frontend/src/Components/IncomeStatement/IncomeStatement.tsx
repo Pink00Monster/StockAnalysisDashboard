@@ -4,6 +4,7 @@ import { useOutletContext } from 'react-router';
 import { getIncomeStatement } from '../../api';
 import Table from '../Table/Table';
 import Spinner from '../Spinner/Spinner';
+import { formatLargeMonetaryNumber, formatLargeNonMonetaryNumber } from '../../Helpers/NumberFormatting';
 
 
 const configs = [
@@ -13,52 +14,52 @@ const configs = [
   },
   {
     label: "Revenue",
-    render: (company: CompanyIncomeStatement) => company.revenue,
+    render: (company: CompanyIncomeStatement) => formatLargeMonetaryNumber(company.revenue),
   },
   {
     label: "Cost Of Revenue",
-    render: (company: CompanyIncomeStatement) => company.costOfRevenue,
+    render: (company: CompanyIncomeStatement) => formatLargeMonetaryNumber(company.costOfRevenue),
   },
   {
     label: "Depreciation",
     render: (company: CompanyIncomeStatement) =>
-      company.depreciationAndAmortization,
+      formatLargeMonetaryNumber(company.depreciationAndAmortization),
   },
   {
     label: "Operating Income",
-    render: (company: CompanyIncomeStatement) => company.operatingIncome,
+    render: (company: CompanyIncomeStatement) => formatLargeMonetaryNumber(company.operatingIncome),
   },
   {
     label: "Income Before Taxes",
-    render: (company: CompanyIncomeStatement) => company.incomeBeforeTax,
+    render: (company: CompanyIncomeStatement) => formatLargeMonetaryNumber(company.incomeBeforeTax),
   },
   {
     label: "Net Income",
-    render: (company: CompanyIncomeStatement) => company.netIncome,
+    render: (company: CompanyIncomeStatement) => formatLargeMonetaryNumber(company.netIncome),
   },
   {
     label: "Net income deductions",
-    render: (company: CompanyIncomeStatement) => company.netIncomeDeductions,
+    render: (company: CompanyIncomeStatement) => formatLargeMonetaryNumber(company.netIncomeDeductions),
   },
   {
     label: "Earnings Per Share",
-    render: (company: CompanyIncomeStatement) => company.eps,
+    render: (company: CompanyIncomeStatement) => formatLargeMonetaryNumber(company.eps),
   },
   {
     label: "Earnings Per Diluted",
-    render: (company: CompanyIncomeStatement) => company.epsDiluted,
+    render: (company: CompanyIncomeStatement) => formatLargeMonetaryNumber(company.epsDiluted),
   },
   {
     label: "Gross Profit",
-    render: (company: CompanyIncomeStatement) => company.grossProfit,
+    render: (company: CompanyIncomeStatement) => formatLargeMonetaryNumber(company.grossProfit),
   },
   {
     label: "Weighted Average Shares Outstanding",
-    render: (company: CompanyIncomeStatement) => company.weightedAverageShsOut,
+    render: (company: CompanyIncomeStatement) => formatLargeNonMonetaryNumber(company.weightedAverageShsOut),
   },
   {
     label: "Weighted Average Shares Outstanding - Diluted",
-    render: (company: CompanyIncomeStatement) => company.weightedAverageShsOutDil,
+    render: (company: CompanyIncomeStatement) => formatLargeNonMonetaryNumber(company.weightedAverageShsOutDil),
   },
 ];
 

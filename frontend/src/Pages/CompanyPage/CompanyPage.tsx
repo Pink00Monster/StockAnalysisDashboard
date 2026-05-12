@@ -6,6 +6,7 @@ import Sidebar from '../../Components/Sidebar/Sidebar';
 import CompanyDashboard from '../../Components/CompanyDashboard/CompanyDashboard';
 import Tile from '../../Components/Tile/Tile';
 import Spinner from '../../Components/Spinner/Spinner';
+import { formatLargeMonetaryNumber } from '../../Helpers/NumberFormatting';
 
 
 const CompanyPage = () => {
@@ -26,9 +27,9 @@ const CompanyPage = () => {
           <Sidebar />
           <CompanyDashboard symbol={symbol!}>
             <Tile title="Company Name" subTitle={companyProfile?.companyName} />
-            <Tile title="Price" subTitle={companyProfile?.price.toString()} />
+            <Tile title="Price" subTitle={formatLargeMonetaryNumber(companyProfile?.price)} />
             <Tile title="Sector" subTitle={companyProfile?.sector} />
-            <Tile title="Market Cap" subTitle={companyProfile?.marketCap.toString()} />
+            <Tile title="Market Cap" subTitle={formatLargeMonetaryNumber(companyProfile?.marketCap)} />
             <p className="bg-white shadow rounded text-medium text-gray-900 p-3 mt-1 m-4">
               {companyProfile?.description}
             </p>
