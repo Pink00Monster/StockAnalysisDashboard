@@ -17,5 +17,7 @@ namespace backend.Models
         public decimal LastDividend { get; set; }
         public string Industry { get; set; } = string.Empty;
         public long MarletCap { get; set; }
+
+        public List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }
