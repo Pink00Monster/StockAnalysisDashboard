@@ -10,7 +10,7 @@ namespace backend.Mappers
 {
     public static class StockMappers
     {
-        public static StockDto ToStockDto(this Models.Stock stock)
+        public static StockDto ToStockDto(this Stock stock)
         {
             return new StockDto
             {
@@ -20,7 +20,8 @@ namespace backend.Mappers
                 Purchase = stock.Purchase,
                 LastDividend = stock.LastDividend,
                 Industry = stock.Industry,
-                MarletCap = stock.MarletCap
+                MarketCap = stock.MarketCap,
+                Comments = stock.Comments.Select(c => c.ToCommentDto()).ToList()
             };
         }
         public static Stock ToStockFromCreateDTO(this CreateStockRequestDto stockDto)
@@ -32,7 +33,7 @@ namespace backend.Mappers
                 Purchase = stockDto.Purchase,
                 LastDividend = stockDto.LastDividend,
                 Industry = stockDto.Industry,
-                MarletCap = stockDto.MarletCap
+                MarketCap = stockDto.MarketCap
             };
         }
         

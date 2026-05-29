@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend.Dtos.Comment;
 
 namespace backend.Dtos.Stock
 {
@@ -13,6 +14,7 @@ namespace backend.Dtos.Stock
         public decimal Purchase { get; set; }
         public decimal LastDividend { get; set; }
         public string Industry { get; set; } = string.Empty;
-        public long MarletCap { get; set; }
+        public long MarketCap { get; set; }
+        public List<CommentDto> Comments { get; set; } = new List<CommentDto>();
     }
 }

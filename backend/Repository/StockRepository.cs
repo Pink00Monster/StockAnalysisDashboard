@@ -34,14 +34,19 @@ namespace backend.Repository
             return stock;
         }
 
-        public async Task<List<Stock>> GetAllStocksAsync()
+        public Task<List<Stock>> GetAllStocksAsync()
         {
-            return await _context.Stocks.ToListAsync();
+            return _context.Stocks.Include(s => s.Comments).ToListAsync();
         }
 
-        public async Task<Stock?> GetStockByIdAsync(int id)
+        public Task<Stock?> GetStockByIdAsync(int id)
         {
-            return await _context.Stocks.FindAsync(id);
+            return _context.Stocks.Include(s => s.Comments).FirstOrDefaultAsync(s => s.Id == id);
+        }
+
+        public Task<bool> StockExistsAsync(int id)
+        {
+            return _context.Stocks.AnyAsync(s => s.Id == id);
         }
 
         public async Task<Stock?> UpdateStockAsync(int id, UpdateStockRequestDto stockDto)
@@ -54,7 +59,7 @@ namespace backend.Repository
             stock.Purchase = stockDto.Purchase;
             stock.LastDividend = stockDto.LastDividend;
             stock.Industry = stockDto.Industry;
-            stock.MarletCap = stockDto.MarletCap;
+            stock.MarketCap = stockDto.MarketCap;
 
             await _context.SaveChangesAsync();
             return stock;
