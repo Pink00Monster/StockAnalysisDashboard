@@ -21,13 +21,16 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetStocks()
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             var stocks = await _stockRepository.GetAllStocksAsync();
             return Ok(stocks.Select(s => s.ToStockDto()));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetStockById([FromRoute] int id)
         {
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             var stock = await _stockRepository.GetStockByIdAsync(id);
             if (stock == null) return NotFound();
 
@@ -37,23 +40,26 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateStock([FromBody] CreateStockRequestDto stockDto)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             var stock = stockDto.ToStockFromCreateDTO();
             await _stockRepository.CreateStockAsync(stock);
             return CreatedAtAction(nameof(GetStockById), new { id = stock.Id }, stock.ToStockDto());
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateStock([FromRoute] int id, [FromBody] UpdateStockRequestDto updateDto)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             var stock = await _stockRepository.UpdateStockAsync(id, updateDto);
             if (stock == null) return NotFound();
             
             return Ok(stock.ToStockDto());
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteStock([FromRoute] int id)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             var stock = await _stockRepository.DeleteStockAsync(id);
             if (stock == null) return NotFound();
             return NoContent();

@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using backend.Data;
 using backend.Interfaces;
 using backend.Models;
+using backend.Dtos.Comment;
 
 namespace backend.Repository
 {
@@ -20,6 +17,27 @@ namespace backend.Repository
         public async Task<Comment> CreateCommentAsync(Comment comment)
         {
             await _context.Comments.AddAsync(comment);
+            await _context.SaveChangesAsync();
+            return comment;
+        }
+
+        public async Task<Comment?> DeleteCommentAsync(int id)
+        {
+            var comment = await _context.Comments.FindAsync(id);
+            if (comment == null) return null;
+            _context.Comments.Remove(comment);
+            await _context.SaveChangesAsync();
+            return comment;
+        }
+
+        public async Task<Comment?> UpdateCommentAsync(int id, UpdateCommentDto updateDto)
+        {
+            var comment = await _context.Comments.FindAsync(id);
+            if (comment == null) return null;
+
+            comment.Title = updateDto.Title;
+            comment.Content = updateDto.Content;
+
             await _context.SaveChangesAsync();
             return comment;
         }
