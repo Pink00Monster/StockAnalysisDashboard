@@ -9,5 +9,7 @@ namespace backend.Helpers
     {
         public string? symbol { get; set; } = null;
         public string? companyName { get; set; } = null;
+        public string? SortBy { get; set; } = null;
+        public bool IsDescending { get; set; } = false;
     }
 }

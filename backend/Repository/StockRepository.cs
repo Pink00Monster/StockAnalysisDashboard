@@ -49,6 +49,20 @@ namespace backend.Repository
                 stocks = stocks.Where(s => s.CompanyName.Contains(query.companyName));
             }
 
+            if (!string.IsNullOrEmpty(query.SortBy))
+            {
+                stocks = query.SortBy switch
+                {
+                    "symbol" => query.IsDescending ? stocks.OrderByDescending(s => s.Symbol) : stocks.OrderBy(s => s.Symbol),
+                    "companyName" => query.IsDescending ? stocks.OrderByDescending(s => s.CompanyName) : stocks.OrderBy(s => s.CompanyName),
+                    "purchase" => query.IsDescending ? stocks.OrderByDescending(s => s.Purchase) : stocks.OrderBy(s => s.Purchase),
+                    "lastDividend" => query.IsDescending ? stocks.OrderByDescending(s => s.LastDividend) : stocks.OrderBy(s => s.LastDividend),
+                    "industry" => query.IsDescending ? stocks.OrderByDescending(s => s.Industry) : stocks.OrderBy(s => s.Industry),
+                    "marketCap" => query.IsDescending ? stocks.OrderByDescending(s => s.MarketCap) : stocks.OrderBy(s => s.MarketCap),
+                    _ => stocks
+                };
+            }
+
             return stocks.ToListAsync();
         }
 
