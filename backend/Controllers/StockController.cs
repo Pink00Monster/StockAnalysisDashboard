@@ -1,5 +1,6 @@
 using backend.Data;
 using backend.Dtos.Stock;
+using backend.Helpers;
 using backend.Interfaces;
 using backend.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -19,10 +20,10 @@ namespace backend.Controllers
             _stockRepository = stockRepository;
         }
         [HttpGet]
-        public async Task<IActionResult> GetStocks()
+        public async Task<IActionResult> GetStocks([FromQuery] QueryObject query)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var stocks = await _stockRepository.GetAllStocksAsync();
+            var stocks = await _stockRepository.GetAllStocksAsync(query);
             return Ok(stocks.Select(s => s.ToStockDto()));
         }
 
