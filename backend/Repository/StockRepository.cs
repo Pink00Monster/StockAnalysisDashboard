@@ -48,7 +48,7 @@ namespace backend.Repository
             {
                 stocks = stocks.Where(s => s.CompanyName.Contains(query.companyName));
             }
-
+    
             if (!string.IsNullOrEmpty(query.SortBy))
             {
                 stocks = query.SortBy switch
@@ -63,7 +63,8 @@ namespace backend.Repository
                 };
             }
 
-            return stocks.ToListAsync();
+            var skipNumber = (query.Page - 1) * query.PageSize;
+            return stocks.Skip(skipNumber).Take(query.PageSize).ToListAsync();
         }
 
         public Task<Stock?> GetStockByIdAsync(int id)
