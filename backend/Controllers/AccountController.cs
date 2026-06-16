@@ -1,4 +1,5 @@
 using backend.Dtos.Account;
+using backend.Interfaces;
 using backend.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,11 @@ namespace backend.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
 
-        public AccountController(UserManager<AppUser> userManager)
+        private readonly ITokenService _tokenService;
+        public AccountController(UserManager<AppUser> userManager, ITokenService tokenService)
         {
             _userManager = userManager;
+            _tokenService = tokenService;
         }
 
         [HttpPost("register")]
@@ -36,7 +39,12 @@ namespace backend.Controllers
                     var addToRoleResult = await _userManager.AddToRoleAsync(user, "User");
                     if (addToRoleResult.Succeeded)
                     {
-                        return Ok(new { message = "User registered successfully" });
+                        return Ok(new NewUserDto
+                        {
+                            Username = user.UserName,
+                            Email = user.Email,
+                            Token = _tokenService.CreateToken(user)
+                        });
                     }
                     else
                     {
