@@ -44,5 +44,44 @@ namespace backend.Controllers
                 return StatusCode(500, ex);
             }
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddStockToPortfolio(string symbol)
+        {
+            try
+            {
+                var username = User.GetUsername();
+                var appUser = await _userManager.FindByNameAsync(username);
+                var existingStock = await _stockRepository.GetStockBySymbolAsync(symbol);
+                if (existingStock == null)
+                {
+                    return NotFound("Stock not found!");
+                }
+
+                var userPortfolio = await _portfolioRepository.GetUserPortfolioAsync(appUser);
+                if(userPortfolio.Any(s => s.Symbol.ToLower() == symbol.ToLower()))
+                {
+                    return BadRequest("Stock already exists in the portfolio!");
+                }
+
+                var portfolioEntry = new Portfolio
+                {
+                    AppUserId = appUser.Id,
+                    StockId = existingStock.Id
+                };
+
+                await _portfolioRepository.AddPortfolioAsync(portfolioEntry);
+                if (userPortfolio == null)
+                {
+                    return StatusCode(500, "Can not create portfolio for the user!");
+                }
+                return Created();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace backend.Interfaces
     {
         Task<List<Stock>> GetAllStocksAsync(QueryObject query);
         Task<Stock?> GetStockByIdAsync(int id);
+        Task<Stock?> GetStockBySymbolAsync(string symbol);
         Task<Stock> CreateStockAsync(Stock stock);
         Task<Stock?> UpdateStockAsync(int id, UpdateStockRequestDto stockDto);
         Task<Stock?> DeleteStockAsync(int id);

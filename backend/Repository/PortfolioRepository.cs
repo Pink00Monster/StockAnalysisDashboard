@@ -12,6 +12,14 @@ namespace backend.Repository
         {
             _context = context;
         }
+
+        public async Task<Portfolio> AddPortfolioAsync(Portfolio portfolio)
+        {
+            await _context.Portfolios.AddAsync(portfolio);
+            await _context.SaveChangesAsync();
+            return portfolio;
+        }
+
         public async Task<List<Stock>> GetUserPortfolioAsync(AppUser user)
         {
             return await _context.Portfolios
