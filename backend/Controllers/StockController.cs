@@ -26,7 +26,8 @@ namespace backend.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var stocks = await _stockRepository.GetAllStocksAsync(query);
-            return Ok(stocks.Select(s => s.ToStockDto()));
+            var stockDtos = stocks.Select(s => s.ToStockDto()).ToList();
+            return Ok(stockDtos);
         }
 
         [HttpGet("{id:int}")]
