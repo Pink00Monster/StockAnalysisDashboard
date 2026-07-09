@@ -10,5 +10,6 @@ namespace backend.Interfaces
     {
         Task<List<Stock>> GetUserPortfolioAsync(AppUser user);
         Task<Portfolio> AddPortfolioAsync(Portfolio portfolio);
+        Task<Portfolio> DeletePortfolioBySymbolAsync(AppUser appUser, string symbol);
     }
 }

@@ -20,6 +20,19 @@ namespace backend.Repository
             return portfolio;
         }
 
+        public async Task<Portfolio> DeletePortfolioBySymbolAsync(AppUser appUser, string symbol)
+        {
+            var portfolioEntry = await _context.Portfolios.FirstOrDefaultAsync(p => p.AppUserId == appUser.Id && p.Stock.Symbol.ToLower() == symbol.ToLower());
+            if (portfolioEntry == null)
+            {
+                throw new InvalidOperationException("Stock not found in the portfolio!");
+            }
+
+            _context.Portfolios.Remove(portfolioEntry);
+            await _context.SaveChangesAsync();
+            return portfolioEntry;
+        }
+
         public async Task<List<Stock>> GetUserPortfolioAsync(AppUser user)
         {
             return await _context.Portfolios

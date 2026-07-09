@@ -83,5 +83,36 @@ namespace backend.Controllers
                 return StatusCode(500, ex);
             }
         }
+
+        [HttpDelete]
+        [Authorize]
+        public async Task<IActionResult> RemoveStockFromPortfolio(string symbol)
+        {
+            try
+            {
+                var username = User.GetUsername();
+                var appUser = await _userManager.FindByNameAsync(username);
+
+                var existingStock = await _stockRepository.GetStockBySymbolAsync(symbol);
+                if (existingStock == null)
+                {
+                    return NotFound("Stock not found!");
+                }
+
+                var userPortfolio = await _portfolioRepository.GetUserPortfolioAsync(appUser);
+                var portfolioEntry = userPortfolio.FirstOrDefault(s => s.Symbol.ToLower() == symbol.ToLower());
+                if (portfolioEntry == null)
+                {
+                    return NotFound("Stock not found in the portfolio!");
+                }
+
+                await _portfolioRepository.DeletePortfolioBySymbolAsync(appUser, symbol);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
     }
 }
