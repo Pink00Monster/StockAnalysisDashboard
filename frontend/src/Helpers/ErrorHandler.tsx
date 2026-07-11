@@ -8,16 +8,20 @@ export const handleError = (error: any) => {
       for (let val of err?.data.errors) {
         toast.warning(val.description);
       }
-    } else if (typeof err?.data.errors === "object") {
+    } 
+    else if (typeof err?.data.errors === "object") {
       for (let e in err?.data.errors) {
         toast.warning(err.data.errors[e][0]);
       }
-    } else if (err?.data) {
+    } 
+    else if (err?.data) {
       toast.warning(err.data);
-    } else if (err?.status == 401) {
+    } 
+    else if (err?.status == 401) {
       toast.warning("Please login");
       window.history.pushState({}, "LoginPage", "/login");
-    } else if (err) {
+    } 
+    else if (err) {
       toast.warning(err?.data);
     }
   }
