@@ -3,6 +3,7 @@ using backend.Data;
 using backend.Interfaces;
 using backend.Models;
 using backend.Dtos.Comment;
+using backend.Helpers;
 
 namespace backend.Repository
 {
@@ -42,9 +43,25 @@ namespace backend.Repository
             return comment;
         }
 
-        public async Task<List<Comment>> GetAllCommentsAsync()
+        public async Task<List<Comment>> GetAllCommentsAsync(CommentQueryParameters queryParameters)
         {
-            return await _context.Comments.Include(c => c.AppUser).ToListAsync();   
+            var comments = _context.Comments.Include(c => c.AppUser).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryParameters.Symbol))
+            {
+                comments = comments.Where(c => c.Stock.Symbol == queryParameters.Symbol);
+            }
+
+            if (queryParameters.IsDescending)
+            {
+                comments = comments.OrderByDescending(c => c.CreatedOn);
+            }
+            else
+            {
+                comments = comments.OrderBy(c => c.CreatedOn);
+            }
+
+            return await comments.ToListAsync();
         }
 
         public async Task<Comment?> GetCommentByIdAsync(int id)
