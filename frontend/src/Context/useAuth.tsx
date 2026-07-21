@@ -40,7 +40,7 @@ export const UserProvider = ({ children }: Props) =>{
             if (res){
                 localStorage.setItem("token", res?.data.token);
                 const userObj = {
-                    userName: res?.data.userName,
+                    userName: res?.data.username,
                     email: res?.data.email
                 }
                 localStorage.setItem("user", JSON.stringify(userObj));
@@ -54,10 +54,11 @@ export const UserProvider = ({ children }: Props) =>{
 
     const loginUser = async (username: string, password: string) => {
         await loginAPI(username, password).then((res) => {
+             console.log("login response data:", res?.data); 
             if (res){
                 localStorage.setItem("token", res?.data.token);
                 const userObj = {
-                    userName: res?.data.userName,
+                    userName: res?.data.username,
                     email: res?.data.email
                 }
                 localStorage.setItem("user", JSON.stringify(userObj));

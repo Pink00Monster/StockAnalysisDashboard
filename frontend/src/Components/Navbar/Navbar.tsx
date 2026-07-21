@@ -1,10 +1,13 @@
-import React from 'react'
 import logo from './logo.png'
 import { Link } from 'react-router'
+import { useAuth } from '../../Context/useAuth'
 
 type Props = {}
 
 const Navbar = (props: Props) => {
+  const {isLoggedIn, user, logoutUser} = useAuth();
+  console.log("user object:", user);
+console.log("user.userName:", user?.userName);
   return (
      <nav className="relative container mx-auto p-6">
       <div className="flex items-center justify-between">
@@ -18,15 +21,29 @@ const Navbar = (props: Props) => {
             </Link>
           </div>
         </div>
-        <div className="hidden lg:flex items-center space-x-6 text-back">
-          <div className="hover:text-darkBlue">Login</div>
+        {isLoggedIn() ? (
+          <div className="hidden lg:flex items-center space-x-6 text-back">
+          <div className="hover:text-blue-500">Welcome, {user!.userName}</div>
+          
           <a
+            onClick={logoutUser}
             href=""
-            className="px-8 py-3 font-bold rounded text-white bg-lightGreen hover:opacity-70"
+            className="px-8 py-3 font-bold rounded text-white bg-green-600 hover:opacity-70"
           >
-            Signup
+            Logout
           </a>
         </div>
+        ) : (
+          <div className="hidden lg:flex items-center space-x-6 text-back">
+          <Link to="/login" className="hover:text-darkBlue">
+            Login
+          </Link>
+          <Link to="/register" className="px-8 py-3 font-bold rounded text-white bg-green-600 hover:opacity-70">
+            Signup
+          </Link>
+        </div>   
+        )}
+        
       </div>
     </nav>
   )
