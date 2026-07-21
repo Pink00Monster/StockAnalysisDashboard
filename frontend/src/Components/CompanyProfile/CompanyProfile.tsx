@@ -5,6 +5,7 @@ import { getKeyMetrics } from '../../api';
 import RatioList from '../RatioList/RatioList';
 import Spinner from '../Spinner/Spinner';
 import { formatLargeNonMonetaryNumber, formatRatio } from '../../Helpers/NumberFormatting';
+import StockComment from '../StockComment/StockComment';
 
 
 const tableConfig = [
@@ -82,9 +83,10 @@ const CompanyProfile = () => {
   return (
     <>
       {companKeyMetrics ? (
-        <>
+        <div className="flex flex-col">
           <RatioList data={companKeyMetrics} config={tableConfig} />
-        </>
+          <StockComment stockSymbol={symbol} />
+        </div>
       ) : (
         <Spinner />
       )}
