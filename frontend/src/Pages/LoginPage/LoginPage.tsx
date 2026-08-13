@@ -21,8 +21,8 @@ const LoginPage = (props: Props) => {
         resolver: yupResolver(validation)
     });
 
-const handleLogin = (data: LoginFormsInputs) => {
-    loginUser(data.userName, data.password);
+const handleLogin = async (data: LoginFormsInputs) => {
+    await loginUser(data.userName, data.password);
 }
 
   return (
