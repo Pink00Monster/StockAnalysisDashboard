@@ -1,9 +1,10 @@
 import React from 'react'
 import Card from '../../Card/Card';
 import CardPortfolio from '../CardPortfolio/CardPortfolio';
+import type { PortfolioGet } from '../../../Models/Portfolio';
 
 type Props = {
-  portfolioValues: string[];
+  portfolioValues: PortfolioGet[];
   onPortfolioDelete: (e:any) => void;
 }
 
@@ -19,7 +20,7 @@ const ListPortfolio = ({ portfolioValues, onPortfolioDelete }: Props) => {
             portfolioValues.map((portfolioValue) => {
               return (
                 <CardPortfolio
-                  key={portfolioValue}
+                  key={portfolioValue.symbol}
                   portfolioValue={portfolioValue}
                   onPortfolioDelete={onPortfolioDelete}
                 />
